@@ -4,11 +4,14 @@ $(function(){
   var file_md = 'sample.md';
   // リストは数字にするか黒丸にするか
   var list_type_is_number = false;
+  // ヘッダの最初は何にするか 1ならh1とh2を取得
+  var header_start = 1;
 
   //ファイルを取得してhtmlにレンダリング
   $.get(file_md, function(read_md){
     var converter = new showdown.Converter({
-      prefixHeaderId: true
+      prefixHeaderId: true,
+      headerLevelStart: header_start,
     });
     document.getElementById('qa_render').innerHTML = converter.makeHtml(read_md);
 
@@ -16,13 +19,17 @@ $(function(){
     var mark_chapter = '';
     var currentlevel = 0;
     var list_type = (list_type_is_number === true) ? 'ol' : 'ul';
-    $('#qa_render h1, #qa_render h2').each(function(idcount){
+    var header_next = header_start + 1;
+    var selector_header = '#qa_render h' + header_start + ', #qa_render h' + header_next;
+    $(selector_header).each(function(idcount){
       idcount++;
-      this.id = "chapter-" + idcount;
+      this.id = 'chapter-' + idcount;
+      //隣接要素のpにはidを割り振る
+      $(this).next('p').attr( 'id' , 'answer-' + idcount);
 
       var check_node = this.nodeName.toLowerCase();
-      if(check_node == "h1") { var level = 1; }
-      else if(check_node == "h2") { var level = 2; }
+      if(check_node == 'h' + header_start) { var level = 1; }
+      else if(check_node == 'h' + header_next) { var level = 2; }
 
       while(currentlevel < level){
         mark_chapter += '<' + list_type + ' class="chapter">';
