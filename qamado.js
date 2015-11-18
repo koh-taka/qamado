@@ -39,12 +39,24 @@ $(function(){
         mark_chapter += '<\/' + list_type + '>';
         currentlevel--;
       }
-      mark_chapter += '<li><a href="#' + this.id + '">' + $(this).html() + "<\/a><\/li>\n";
+      mark_chapter += '<li class="lv-' + level + '"><a href="#' + this.id + '">' + $(this).html() + "<\/a><\/li>\n";
     });
     while(currentlevel > 0) {
       mark_chapter += '<\/' + list_type + '>';
       currentlevel--;
     }
-    $("#qa_chapter").html(mark_chapter);
+
+    $('#qa_chapter')
+      .html(mark_chapter)
+      .addClass('panel panel-info');
+    $('#qa_chapter ' + list_type)
+      .addClass('list-group');
+     $('#qa_chapter li.lv-1').addClass('list-group-item btn-info');
+     $('#qa_chapter li.lv-1 a').css('color', 'white').css('font-size', 'large');
+     $('#qa_chapter li.lv-2').addClass('list-group-item');
+
+    $('#qa_render').addClass('panel panel-info');
+    $('#qa_render h' + header_next).addClass('panel-heading');
+    $('#qa_render p').addClass('panel-body');
   });
 });
