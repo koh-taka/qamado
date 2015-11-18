@@ -17,48 +17,48 @@ $(function(){
     document.getElementById('qa_render').innerHTML = converter.makeHtml(read_md);
 
     //目次を作る
-    var mark_chapter = '';
-    var currentlevel = 0;
     var list_type = (list_type_is_number === true) ? 'ol' : 'ul';
     var header_next = header_start + 1;
     var selector_header = '#qa_render h' + header_start + ', #qa_render h' + header_next;
-    $(selector_header).each(function(idcount){
-      idcount++;
-      this.id = 'chapter-' + idcount;
-      //隣接要素のpにはidを割り振る
-      $(this).next('p').attr( 'id' , 'answer-' + idcount);
 
-      var check_node = this.nodeName.toLowerCase();
-      if(check_node == 'h' + header_start) { var level = 1; }
-      else if(check_node == 'h' + header_next) { var level = 2; }
-
-      while(currentlevel < level){
-        mark_chapter += '<' + list_type + ' class="chapter">';
-        currentlevel++;
-      }
-      while(currentlevel > level){
-        mark_chapter += '<\/' + list_type + '>';
-        currentlevel--;
-      }
-      mark_chapter += '<li class="lv-' + level + '"><a href="#' + this.id + '">' + $(this).html() + "<\/a><\/li>\n";
+    var array_h = [];
+    $(selector_header).each(function(count){
+      var t = {
+        tag: this.nodeName ,
+        id: this.id ,
+        text: this.innerHTML ,
+      };
+      array_h.push(t);
     });
-    while(currentlevel > 0) {
-      mark_chapter += '<\/' + list_type + '>';
-      currentlevel--;
-    }
+
+    var list_h = '';
+    $(array_h).each(function(count){
+      if(this.tag === 'H1'){
+        list_h += '<li class="lv-1"><a href="#' + this.id + '">' + this.text + "<\/a><\/li>\n";
+      }else if(this.tag === 'H2'){
+        list_h += '<li class="lv-2"><a href="#' + this.id + '">' + this.text + "<\/a><\/li>\n";
+      }
+    });
+
+    var render_list = '<' + list_type + ' class="list-group">' + list_h + '<\/' + list_type + '>';
 
     $('#qa_chapter')
-      .html(mark_chapter)
+      .html(render_list)
       .addClass('panel panel-info');
-    $('#qa_chapter ' + list_type)
-      .addClass('list-group');
-     $('#qa_chapter li.lv-1').addClass('list-group-item btn-default');
-     $('#qa_chapter li.lv-1 a').addClass('text-primary').css('font-size', 'large');
+     $('#qa_chapter li.lv-1')
+       .addClass('list-group-item btn-default')
+       .css('font-size', 'large');
      $('#qa_chapter li.lv-2').addClass('list-group-item');
 
     $('#qa_render').addClass('panel panel-info');
-    $('#qa_render h' + header_start).addClass('panel-heading').css('margin-top', '0');
-    $('#qa_render h' + header_next).addClass('panel-heading').css('margin', '0.5em').css('padding', '0.2em');
-    $('#qa_render p').addClass('panel-body').css('margin', '0.5em');
+    $('#qa_render h' + header_start)
+      .addClass('panel-heading')
+      .css('margin-top', '0');
+    $('#qa_render h' + header_next)
+      .addClass('panel-heading')
+      .css('margin', '0.5em').css('padding', '0.2em');
+    $('#qa_render p')
+      .addClass('panel-body')
+      .css('margin', '0.5em');
   });
 });
