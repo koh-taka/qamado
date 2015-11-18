@@ -6,7 +6,7 @@ $(function(){
   // リストは数字にするか黒丸にするか
   var list_type_is_number = false;
   // ヘッダの最初は何にするか 1ならh1とh2を取得
-  var header_start = 3;
+  var header_start = 1;
 
   //ファイルを取得してhtmlにレンダリング
   $.get(file_md, function(read_md){
@@ -14,6 +14,8 @@ $(function(){
       prefixHeaderId: true,
       headerLevelStart: header_start,
       simplifiedAutoLink: true,
+      tables: true,
+      tablesHeaderId: true,
     });
     document.getElementById('qa_render').innerHTML = converter.makeHtml(read_md);
 
@@ -67,5 +69,10 @@ $(function(){
     $('#qa_render p')
       .addClass('panel-body')
       .css('margin', '0.5em');
+    $('#qa_render table')
+      .addClass('container table table-bordered table-stripped')
+      .css('width', '90%');
+    $('#qa_render table th')
+      .addClass('info');
   });
 });
