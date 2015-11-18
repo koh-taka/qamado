@@ -51,12 +51,13 @@ $(function(){
       .addClass('panel panel-info');
     $('#qa_chapter ' + list_type)
       .addClass('list-group');
-     $('#qa_chapter li.lv-1').addClass('list-group-item btn-info');
+     $('#qa_chapter li.lv-1').addClass('list-group-item btn-primary');
      $('#qa_chapter li.lv-1 a').css('color', 'white').css('font-size', 'large');
      $('#qa_chapter li.lv-2').addClass('list-group-item');
 
     $('#qa_render').addClass('panel panel-info');
-    $('#qa_render h' + header_next).addClass('panel-heading');
-    $('#qa_render p').addClass('panel-body');
+    $('#qa_render h' + header_start).addClass('panel-heading').css('margin-top', '0');
+    $('#qa_render h' + header_next).addClass('panel-heading').css('margin', '0.5em').css('padding', '0.2em');
+    $('#qa_render p').addClass('panel-body').css('margin', '0.5em');
   });
 });
