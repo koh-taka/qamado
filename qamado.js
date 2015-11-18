@@ -1,5 +1,6 @@
-$(function(){
 
+
+$(function(){
   // ファイルパス
   var file_md = 'sample.md';
   // リストは数字にするか黒丸にするか
@@ -51,8 +52,8 @@ $(function(){
       .addClass('panel panel-info');
     $('#qa_chapter ' + list_type)
       .addClass('list-group');
-     $('#qa_chapter li.lv-1').addClass('list-group-item btn-primary');
-     $('#qa_chapter li.lv-1 a').css('color', 'white').css('font-size', 'large');
+     $('#qa_chapter li.lv-1').addClass('list-group-item btn-default');
+     $('#qa_chapter li.lv-1 a').addClass('text-primary').css('font-size', 'large');
      $('#qa_chapter li.lv-2').addClass('list-group-item');
 
     $('#qa_render').addClass('panel panel-info');
