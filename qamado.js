@@ -6,7 +6,7 @@ $(function(){
   // リストは数字にするか黒丸にするか
   var list_type_is_number = false;
   // ヘッダの最初は何にするか 1ならh1とh2を取得
-  var header_start = 1;
+  var header_start = 3;
 
   //ファイルを取得してhtmlにレンダリング
   $.get(file_md, function(read_md){
@@ -21,23 +21,29 @@ $(function(){
     var header_next = header_start + 1;
     var selector_header = '#qa_render h' + header_start + ', #qa_render h' + header_next;
 
+    //目次のデータを必要なものだけ配列に取得
     var array_h = [];
     $(selector_header).each(function(count){
+      if(this.nodeName === 'H' + header_start){
+        var level = 1;
+      }else if(this.nodeName === 'H' + header_next){
+        var level = 2;
+      }else{
+        var level = 2;
+      }
+
       var t = {
-        tag: this.nodeName ,
+        lv: level ,
         id: this.id ,
         text: this.innerHTML ,
       };
       array_h.push(t);
     });
 
+    //目次のデータを文字列にする
     var list_h = '';
     $(array_h).each(function(count){
-      if(this.tag === 'H1'){
-        list_h += '<li class="lv-1"><a href="#' + this.id + '">' + this.text + "<\/a><\/li>\n";
-      }else if(this.tag === 'H2'){
-        list_h += '<li class="lv-2"><a href="#' + this.id + '">' + this.text + "<\/a><\/li>\n";
-      }
+      list_h += '<li class="lv-' + this.lv + '"><a href="#' + this.id + '">' + this.text + "<\/a><\/li>\n";
     });
 
     var render_list = '<' + list_type + ' class="list-group">' + list_h + '<\/' + list_type + '>';
