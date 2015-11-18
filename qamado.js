@@ -13,6 +13,7 @@ $(function(){
     var converter = new showdown.Converter({
       prefixHeaderId: true,
       headerLevelStart: header_start,
+      simplifiedAutoLink: true,
     });
     document.getElementById('qa_render').innerHTML = converter.makeHtml(read_md);
 
