@@ -50,6 +50,8 @@ $(function(){
     });
 
     var render_list = '<' + list_type + ' class="list-group">' + list_h + '<\/' + list_type + '>';
+    render_list = $.parseHTML(render_list);
+
 
     $('#qa_chapter')
       .html(render_list)
