@@ -17,7 +17,14 @@ $(function(){
       tables: true,
       tablesHeaderId: true,
     });
-    document.getElementById('qa_render').innerHTML = converter.makeHtml(read_md);
+//    document.getElementById('qa_render').innerHTML = converter.makeHtml(read_md);
+    var conv_md = converter.makeHtml(read_md);
+    var qa_render = new Vue({
+      el: '#qa_render',
+      data: {
+        message: conv_md
+      }
+    })
 
     //目次を作る
     var list_type = (list_type_is_number === true) ? 'ol' : 'ul';
