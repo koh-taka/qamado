@@ -56,24 +56,21 @@ $(function(){
     $('#qa_chapter')
       .html(render_list)
       .addClass('panel panel-info');
-     $('#qa_chapter li.lv-1')
-       .addClass('list-group-item btn-default')
-       .css('font-size', 'large');
-     $('#qa_chapter li.lv-2').addClass('list-group-item');
+    $('#qa_chapter li.lv-1')
+      .addClass('list-group-item btn-default');
+    $('#qa_chapter li.lv-2')
+      .addClass('list-group-item');
 
-    $('#qa_render').addClass('panel panel-info');
+    $('#qa_render')
+      .addClass('panel panel-info');
     $('#qa_render h' + header_start)
-      .addClass('panel-heading')
-      .css('margin-top', '0');
+      .addClass('panel-heading header_start');
     $('#qa_render h' + header_next)
-      .addClass('panel-heading')
-      .css('margin', '0.5em').css('padding', '0.2em');
+      .addClass('panel-heading header_next');
     $('#qa_render p')
-      .addClass('panel-body')
-      .css('margin', '0.5em');
+      .addClass('panel-body');
     $('#qa_render table')
-      .addClass('container table table-bordered table-stripped')
-      .css('width', '90%');
+      .addClass('container table table-bordered table-stripped');
     $('#qa_render table th')
       .addClass('info');
   });

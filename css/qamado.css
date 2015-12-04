@@ -1,0 +1,20 @@
+#qa_chapter li.lv-1{
+  font-size: large;
+}
+
+#qa_render p{
+  margin: 0 0.5em;
+}
+
+#qa_render table{
+  width: 90%;
+}
+
+#qa_render .header_start{
+  margin-top: 0;
+}
+
+#qa_render .header_next{
+  margin:0.5em;
+  padding: 0.2em;
+}
