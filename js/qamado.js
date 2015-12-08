@@ -22,7 +22,7 @@ $(function(){
     var qa_render = new Vue({
       el: '#qa_render',
       data: {
-        vue_render: conv_md
+        add_html: conv_md
       }
     })
 
@@ -57,7 +57,7 @@ $(function(){
     var qa_chapter = new Vue({
       el: '#qa_chapter',
       data: {
-        vue_chapter: render_list
+        add_html: render_list
       }
     })
 
