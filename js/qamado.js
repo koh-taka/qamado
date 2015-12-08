@@ -22,7 +22,7 @@ $(function(){
     var qa_render = new Vue({
       el: '#qa_render',
       data: {
-        message: conv_md
+        vue_render: conv_md
       }
     })
 
