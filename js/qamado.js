@@ -34,13 +34,8 @@ $(function(){
     //目次のデータを必要なものだけ配列に取得
     var array_h = [];
     $(selector_header).each(function(count){
-      if(this.nodeName === 'H' + header_start){
-        var level = 1;
-      }else if(this.nodeName === 'H' + header_next){
-        var level = 2;
-      }else{
-        var level = 2;
-      }
+      //走査中のheaderタグのレベル（階層）を判別
+      var level = check_header(this.nodeName,header_start);
 
       var t = {
         lv: level ,
@@ -82,3 +77,20 @@ $(function(){
       .addClass('info');
   });
 });
+
+/**
+ * 走査中のheaderタグのレベル（階層）を判別
+ * @param   string nodename 走査中ノードのheaderタグ
+ * @param   string h_start  ヘッダレベル１に該当するタグ
+ * @returns int レベル
+ */
+function check_header(nodename,h_start){
+  var h_next = h_start + 1;
+  if(nodename === 'H' + h_start){
+    return 1;
+  }else if(nodename === 'H' + h_next){
+    return 2;
+  }else{
+    return 2;
+  }
+}
