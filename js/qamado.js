@@ -52,11 +52,16 @@ $(function(){
     });
 
     var render_list = '<' + list_type + ' class="list-group">' + list_h + '<\/' + list_type + '>';
-    render_list = $.parseHTML(render_list);
+    //render_list = $.parseHTML(render_list);
 
+    var qa_chapter = new Vue({
+      el: '#qa_chapter',
+      data: {
+        vue_chapter: render_list
+      }
+    })
 
     $('#qa_chapter')
-      .html(render_list)
       .addClass('panel panel-info');
     $('#qa_chapter li.lv-1')
       .addClass('list-group-item btn-default');
