@@ -5,6 +5,8 @@ $(function(){
   var list_type_is_number = false;
   // ヘッダの最初は何にするか 1ならh1とh2を取得
   var header_start = 1;
+  var html_md = '';
+  var render_list = '';
 
   //ファイルを取得してhtmlにレンダリング
   $.get(file_md, function(read_md){
@@ -15,48 +17,33 @@ $(function(){
       tables: true,
       tablesHeaderId: true,
     });
-    var html_md = converter.makeHtml(read_md);
+
+    html_md = converter.makeHtml(read_md);
 
     //目次を作る
     var list_type = (list_type_is_number === true) ? 'ol' : 'ul';
     var header_next = header_start + 1;
     var selector_header = '#qa_render h' + header_start + ', #qa_render h' + header_next;
 
-    //目次のデータを必要なものだけ配列に取得
-
     var parse_md = $(html_md);
+    var list_h = '';
 
-    var array_h = [];
-
-    parse_md.each(function(count){
+    parse_md.each(function(){
       if(this.id){
 
-        if(this.nodeName === 'H' + header_start){
-          var level = 1;
-        }else if(this.nodeName === 'H' + header_next){
-          var level = 2;
-        }else{
-          var level = 2;
-        }
+        //markdownの見出しを、階層レベルの値に変換
+        var level = chkNodeName(this.nodeName, header_start);
 
-        var t = {
+        //liタグの中身を作成
+        list_h += makeTagLi({
           lv: level ,
           id: this.id ,
-          text: this.innerHTML ,
-        };
-
-        array_h.push(t);
+          text: this.innerHTML
+        });
       }
     });
 
-    //目次のデータを文字列にする
-    var list_h = '';
-    array_h.forEach(function(val,count){
-      var this_array = this[count];
-      var class_btn_def = (this_array.lv === 1) ? ' btn-default' : '';
-      list_h += '<li class="lv-' + this_array.lv + class_btn_def + ' list-group-item"><a href="#' + this_array.id + '">' + this_array.text + "<\/a><\/li>\n";
-    }, array_h);
-    var render_list = '<' + list_type + ' class="list-group panel panel-info">' + list_h + '<\/' + list_type + '>';
+    render_list = '<' + list_type + ' class="list-group panel panel-info">' + list_h + '<\/' + list_type + '>';
 
     document.getElementById('qa_render').innerHTML = html_md;
     document.getElementById('qa_chapter').innerHTML = render_list;
@@ -75,3 +62,40 @@ $(function(){
       .addClass('info');
   });
 });
+
+
+
+
+/**
+ * markdownの見出しを、階層レベルの値に変換
+ * @param   {string} node_name h1,h2,h3...
+ * @param   {int} h_start   configで指定した初期レベル
+ * @returns {int} レベルの値 異常系でも2を出力
+ */
+function chkNodeName(node_name, h_start){
+  var h_next = h_start + 1;
+  if(node_name === 'H' + h_start){
+    return 1;
+  }else if(node_name === 'H' + h_next){
+    return 2;
+  }else{
+    return 2;
+  }
+}
+
+
+/**
+ * liタグの中身を作成
+ * @param   {object} t
+ * @returns {string} li
+ */
+function makeTagLi(t){
+  t = (t) ? t : {
+          lv: 2 ,
+          id: '' ,
+          text: ''
+        };
+
+  var class_btn_def = (t.lv === 1) ? ' btn-default' : '';
+  return '<li class="lv-' + t.lv + class_btn_def + ' list-group-item"><a href="#' + t.id + '">' + t.text + "<\/a><\/li>\n";
+}
