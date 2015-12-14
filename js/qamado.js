@@ -17,7 +17,8 @@ $(function(){
       tables: true,
       tablesHeaderId: true,
     });
-    document.getElementById('qa_render').innerHTML = converter.makeHtml(read_md);
+    var html_md = converter.makeHtml(read_md);
+    document.getElementById('qa_render').innerHTML = html_md;
 
     //目次を作る
     var list_type = (list_type_is_number === true) ? 'ol' : 'ul';
@@ -25,23 +26,32 @@ $(function(){
     var selector_header = '#qa_render h' + header_start + ', #qa_render h' + header_next;
 
     //目次のデータを必要なものだけ配列に取得
-    var array_h = [];
-    $(selector_header).each(function(count){
-      if(this.nodeName === 'H' + header_start){
-        var level = 1;
-      }else if(this.nodeName === 'H' + header_next){
-        var level = 2;
-      }else{
-        var level = 2;
-      }
+    var t = {
+      lv: 12 ,
+      id: 14 ,
+      text: 12 ,
+    };
 
-      var t = {
-        lv: level ,
-        id: this.id ,
-        text: this.innerHTML ,
-      };
-      array_h.push(t);
-    });
+    console.log(t);
+
+
+//    var array_h = [];
+//    $(selector_header).each(function(count){
+//      if(this.nodeName === 'H' + header_start){
+//        var level = 1;
+//      }else if(this.nodeName === 'H' + header_next){
+//        var level = 2;
+//      }else{
+//        var level = 2;
+//      }
+//
+//      var t = {
+//        lv: level ,
+//        id: this.id ,
+//        text: this.innerHTML ,
+//      };
+//      array_h.push(t);
+//    });
 
     //目次のデータを文字列にする
     var list_h = '';
