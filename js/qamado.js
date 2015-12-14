@@ -8,8 +8,9 @@ $(function(){
   var html_md = '';
   var render_list = '';
 
-  //ファイルを取得してhtmlにレンダリング
-  $.get(file_md, function(read_md){
+  $.ajax({
+    url: file_md,
+  }).done(function(read_md){
     var converter = new showdown.Converter({
       prefixHeaderId: true,
       headerLevelStart: header_start,
@@ -60,6 +61,10 @@ $(function(){
       .addClass('container table table-bordered table-stripped');
     $('#qa_render table th')
       .addClass('info');
+
+
+  }).fail(function(data){
+      alert('エラー:Q&Aのファイルが読み込めません');
   });
 });
 
