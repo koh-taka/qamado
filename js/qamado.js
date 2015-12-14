@@ -53,8 +53,7 @@ $(function(){
 
     qa_r.addClass('panel panel-info');
     qa_r.children('h' + header_start).addClass('panel-heading header_start');
-    qa_r.children('h' + header_next).addClass('panel-heading header_next');
-    qa_r.children('p').addClass('panel-body');
+    qa_r.children('h' + header_next).addClass('alert alert-info header_next');
     qa_r.children('table')
       .addClass('container table table-bordered table-stripped')
       .find('th').addClass('info');
@@ -94,6 +93,6 @@ function makeTagLi(t){
           text: ''
         };
 
-  var class_btn_def = (t.lv === 1) ? ' btn-default' : '';
+  var class_btn_def = (t.lv === 1) ? ' panel-heading' : '';
   return '<li class="lv-' + t.lv + class_btn_def + ' list-group-item"><a href="#' + t.id + '">' + t.text + "<\/a><\/li>\n";
 }

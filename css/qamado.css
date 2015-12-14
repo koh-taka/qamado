@@ -1,20 +1,53 @@
 #qa_chapter li.lv-1{
   font-size: large;
+  font-weight: bold;
+}
+#qa_chapter li.lv-2 a:before {
+  font-size: small;
+  font-family: 'Glyphicons Halflings';
+  content: "\e085";
+  margin-right:0.5em;
+}
+
+#qa_chapter li.lv-2{
+  padding-left: 2em;
+}
+
+#qa_render{
 }
 
 #qa_render p{
-  margin: 0 0.5em;
+  margin: 0 2em;
 }
 
 #qa_render table{
   width: 90%;
 }
 
-#qa_render .header_start{
+#qa_render .header_start:first-child{
   margin-top: 0;
+}
+#qa_render p:last-child{
+  margin-bottom: 2em;
+}
+
+#qa_render .panel-heading{
+  margin-top: 2em;
 }
 
 #qa_render .header_next{
-  margin:0.5em;
-  padding: 0.2em;
+  margin-bottom:1em;
+  margin-left:0.5em;
+  margin-right:0.5em;
+  border-bottom-width: 3px;
+  border-right-width: 2px;
+  background-color: ghostwhite;
+  background-image: none;
+}
+
+#qa_render .header_next:before {
+  font-size: small;
+  font-family: 'Glyphicons Halflings';
+  content: "\e085";
+  margin-right:0.5em;
 }
