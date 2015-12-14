@@ -1,6 +1,6 @@
 $(function(){
   // ファイルパス
-  var file_md = '../sample.md';
+  var file_md = 'sample.md';
   // リストは数字にするか黒丸にするか
   var list_type_is_number = false;
   // ヘッダの最初は何にするか 1ならh1とh2を取得
@@ -58,10 +58,8 @@ $(function(){
     qa_r.children('table')
       .addClass('container table table-bordered table-stripped')
       .find('th').addClass('info');
-
-
   }).fail(function(data){
-      alert('エラー:Q&Aのファイルが読み込めません');
+      document.getElementById('qa_render').innerHTML = 'エラー:Q&Aのファイルが読み込めません';
   });
 });
 
