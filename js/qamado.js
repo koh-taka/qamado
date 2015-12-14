@@ -49,26 +49,21 @@ $(function(){
     document.getElementById('qa_render').innerHTML = html_md;
     document.getElementById('qa_chapter').innerHTML = render_list;
 
-    $('#qa_render')
-      .addClass('panel panel-info');
-    $('#qa_render h' + header_start)
-      .addClass('panel-heading header_start');
-    $('#qa_render h' + header_next)
-      .addClass('panel-heading header_next');
-    $('#qa_render p')
-      .addClass('panel-body');
-    $('#qa_render table')
-      .addClass('container table table-bordered table-stripped');
-    $('#qa_render table th')
-      .addClass('info');
+    var qa_r = $('#qa_render');
+
+    qa_r.addClass('panel panel-info');
+    qa_r.children('h' + header_start).addClass('panel-heading header_start');
+    qa_r.children('h' + header_next).addClass('panel-heading header_next');
+    qa_r.children('p').addClass('panel-body');
+    qa_r.children('table')
+      .addClass('container table table-bordered table-stripped')
+      .find('th').addClass('info');
 
 
   }).fail(function(data){
       alert('エラー:Q&Aのファイルが読み込めません');
   });
 });
-
-
 
 
 /**
