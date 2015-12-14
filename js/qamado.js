@@ -1,6 +1,6 @@
 $(function(){
   // ファイルパス
-  var file_md = 'sample.md';
+  var file_md = 'qa.md';
   // リストは数字にするか黒丸にするか
   var list_type_is_number = false;
   // ヘッダの最初は何にするか 1ならh1とh2を取得
